@@ -26,10 +26,13 @@ curl -# https://wordpress.org/latest.tar.gz > $SITEDIR/wordpress.tar.gz
 tar xf $SITEDIR/wordpress.tar.gz -C $SITEDIR
 mv $SITEDIR/wordpress $SITEDIR/public_html
 cp $SITEDIR/public_html/wp-config-sample.php $SITEDIR/public_html/wp-config.php
-sed -i.bk "s/database_name_here/$DB/" $SITEDIR/public_html/wp-config.php 
-sed -i.bk "s/username_here/$DB/" $SITEDIR/public_html/wp-config.php 
-sed -i.bk "s/password_here/$PASSWORD/" $SITEDIR/public_html/wp-config.php 
-sed -i.bk "s/put your unique phrase here/$PASSWORD/" $SITEDIR/public_html/wp-config.php 
+sed -i \
+    -e "s/database_name_here/$DB/" \
+    -e "s/username_here/$DB/" \
+    -e "s/password_here/$PASSWORD/" \
+    -e "s/put your unique phrase here/$PASSWORD/" \
+    -e "s/define('WP_DEBUG', false);/define('WP_DEBUG', false);\r\ndefine('FS_METHOD','direct');/" \
+    $SITEDIR/public_html/wp-config.php
 
 echo Configuring Apache2...
 cat > /tmp/$SITE.conf <<EOF
