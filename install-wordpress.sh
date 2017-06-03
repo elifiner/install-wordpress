@@ -33,6 +33,7 @@ sed -i \
     -e "s/put your unique phrase here/$PASSWORD/" \
     -e "s/define('WP_DEBUG', false);/define('WP_DEBUG', false);\r\ndefine('FS_METHOD','direct');/" \
     $SITEDIR/public_html/wp-config.php
+chmod -R g+w $SITEDIR
 
 echo Configuring Apache2...
 cat > /tmp/$SITE.conf <<EOF
