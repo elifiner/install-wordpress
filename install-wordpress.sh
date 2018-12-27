@@ -25,15 +25,17 @@ sudo mkdir -p $SITEDIR
 sudo chown -R $USER:www-data $SITEDIR
 curl -# https://wordpress.org/latest.tar.gz > $SITEDIR/wordpress.tar.gz
 tar xf $SITEDIR/wordpress.tar.gz -C $SITEDIR
-mv $SITEDIR/wordpress $SITEDIR/public_html
-cp $SITEDIR/public_html/wp-config-sample.php $SITEDIR/public_html/wp-config.php
+mv $SITEDIR/wordpress/* $SITEDIR/
+rmdir $SITEDIR/wordpress
+rm $SITEDIR/wordpress.tar.gz
+cp $SITEDIR/wp-config-sample.php $SITEDIR/wp-config.php
 sed -i \
     -e "s/database_name_here/$DB/" \
     -e "s/username_here/$DB/" \
     -e "s/password_here/$PASSWORD/" \
     -e "s/put your unique phrase here/$PASSWORD/" \
     -e "s/define('WP_DEBUG', false);/define('WP_DEBUG', false);\r\ndefine('FS_METHOD','direct');/" \
-    $SITEDIR/public_html/wp-config.php
+    $SITEDIR/wp-config.php
 chmod -R g+w $SITEDIR
 
 echo Configuring Apache2...
@@ -41,7 +43,7 @@ cat > /tmp/$SITE.conf <<EOF
 <VirtualHost *:80>
     ServerName $SITE.$DOMAIN
     ServerAdmin webmaster@localhost
-    DocumentRoot $SITEDIR/public_html
+    DocumentRoot $SITEDIR
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
