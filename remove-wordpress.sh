@@ -5,7 +5,7 @@ if [ ! $1 ]; then
 fi
 
 SITE=$1
-DB=wp_$SITE
+DB=$(echo wp_$SITE | sed 's/[^a-z0-9]/_/g')
 SITEDIR=/var/www/html/$SITE
 
 read -p "Enter site name again: " SITE_AGAIN

@@ -6,7 +6,7 @@ fi
 
 DOMAIN=elifiner.com
 SITE=$1
-DB=wp_$SITE
+DB=$(echo wp_$SITE | sed 's/[^a-z0-9]/_/g')
 SITEDIR=/var/www/html/$SITE
 PASSWORD=`python -c 'import os; print os.urandom(16).encode("hex")'`
 
