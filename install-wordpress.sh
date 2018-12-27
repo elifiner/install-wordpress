@@ -4,6 +4,7 @@ if [ ! $1 ]; then
     exit 1
 fi
 
+DOMAIN=elifiner.com
 SITE=$1
 DB=wp_$SITE
 SITEDIR=/var/www/html/$SITE
@@ -38,7 +39,7 @@ chmod -R g+w $SITEDIR
 echo Configuring Apache2...
 cat > /tmp/$SITE.conf <<EOF
 <VirtualHost *:80>
-    ServerName $SITE.elifiner.com
+    ServerName $SITE.$DOMAIN
     ServerAdmin webmaster@localhost
     DocumentRoot $SITEDIR/public_html
     ErrorLog ${APACHE_LOG_DIR}/error.log
