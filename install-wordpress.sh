@@ -34,7 +34,7 @@ sed -i \
     -e "s/username_here/$DB/" \
     -e "s/password_here/$PASSWORD/" \
     -e "s/put your unique phrase here/$PASSWORD/" \
-    -e "s/define('WP_DEBUG', false);/define('WP_DEBUG', false);\r\ndefine('FS_METHOD','direct');/" \
+    -e "s/define( *'WP_DEBUG', false *);/define('WP_DEBUG', false);\r\ndefine('FS_METHOD','direct');/" \
     $SITEDIR/wp-config.php
 chmod -R g+w $SITEDIR
 
