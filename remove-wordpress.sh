@@ -24,6 +24,7 @@ EOF
 echo Removing Apache2 config...
 [ -f /etc/apache2/sites-enabled/$SITE.conf ] && sudo rm /etc/apache2/sites-enabled/$SITE.conf
 [ -f /etc/apache2/sites-available/$SITE.conf ] && sudo rm /etc/apache2/sites-available/$SITE.conf
+sudo service apache2 reload
 
 echo Removing Wordpress...
 if [ $SITEDIR != "/var/www/html/" ]; then
